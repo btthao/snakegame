@@ -213,9 +213,9 @@ start.addEventListener('click', function() {
 window.addEventListener("touchstart", startTouch, false);
 window.addEventListener("touchmove", moveTouch, false);
 
-// Swipe Up / Down / Left / Right
-var initialX = null;
-var initialY = null;
+
+let initialX = null;
+let initialY = null;
 
 function startTouch(e) {
     initialX = e.touches[0].clientX;
@@ -231,14 +231,14 @@ function moveTouch(e) {
         return;
     }
 
-    var currentX = e.touches[0].clientX;
-    var currentY = e.touches[0].clientY;
+    let currentX = e.touches[0].clientX;
+    let currentY = e.touches[0].clientY;
 
-    var diffX = initialX - currentX;
-    var diffY = initialY - currentY;
+    let diffX = initialX - currentX;
+    let diffY = initialY - currentY;
 
-    if (Math.abs(diffX) > Math.abs(diffY)) {
-        // sliding horizontally
+    if (Math.abs(diffX) > Math.abs(diffY) && (direction == row || direction == -row)) {
+
         if (diffX > 0) {
             // swiped left
             direction = -1;
@@ -246,8 +246,8 @@ function moveTouch(e) {
             // swiped right
             direction = 1;
         }
-    } else {
-        // sliding vertically
+    } else if (Math.abs(diffX) <= Math.abs(diffY) && (direction == 1 || direction == -1)) {
+
         if (diffY > 0) {
             // swiped up
             direction = -row;
