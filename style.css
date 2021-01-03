@@ -1,0 +1,63 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
+}
+
+body {
+    /* min-height: 100vh;
+    min-width: 100vw; */
+    padding: 20px 0 0;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(24, 87, 48, 0.705);
+}
+
+#start {
+    margin: 10px auto 15px;
+    padding: 3px 15px;
+    background-color: transparent;
+    border: 2px solid black;
+    outline: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#game-area {
+    background-color: transparent;
+    border: none;
+    border: 0.4vmin solid black;
+    width: 80vmin;
+    height: 80vmin;
+    display: grid;
+    grid-template-columns: repeat(25, 1fr);
+    grid-template-rows: repeat(25, 1fr);
+}
+
+.apple {
+    border-radius: 8px;
+    background-color: rgba(156, 40, 40, 0.795);
+    animation: spin 2s linear infinite;
+}
+
+.snake {
+    background-color: rgba(232, 253, 248, 0.733);
+    border-radius: 8px;
+}
+
+.lose {
+    background-color: rgba(0, 0, 0, 0.829);
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
