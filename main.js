@@ -114,6 +114,12 @@ window.addEventListener('keydown', control)
 
 //start the game 
 start.addEventListener('click', function() {
+    start.disabled = true;
+    setTimeout(function() { start.disabled = false }, 1000);
+    allSquares.forEach(square =>
+        square.classList.remove('lose'))
+    allSquares.forEach(square =>
+        square.style.opacity = '1')
     apple()
     snake = [37, 36, 35]
     lastRender = 0;
@@ -121,10 +127,7 @@ start.addEventListener('click', function() {
     speed = 200;
     score.innerHTML = '0'
     point = 0;
-    allSquares.forEach(square =>
-        square.classList.remove('lose'))
-    allSquares.forEach(square =>
-        square.style.opacity = '1')
+
 
 
     function play(currentTime) {
@@ -140,28 +143,28 @@ start.addEventListener('click', function() {
                 switch (direction) {
                     case 1:
                         if (snake[0] == row - 1 || snake[0] % row == (row - 1)) {
-                            end()
+                            end();
                             return window.cancelAnimationFrame(game);
 
                         }
                         break
                     case -1:
                         if (snake[0] == 0 || snake[0] % row == 0) {
-                            end()
+                            end();
                             return window.cancelAnimationFrame(game);
 
                         }
                         break
                     case row:
                         if (snake[0] >= (row * row) - row) {
-                            end()
+                            end();
                             return window.cancelAnimationFrame(game);
 
                         }
                         break
                     case -row:
                         if (snake[0] < row) {
-                            end()
+                            end();
                             return window.cancelAnimationFrame(game);
 
                         }
@@ -169,7 +172,7 @@ start.addEventListener('click', function() {
                 }
 
                 if (allSquares[snake[0] + direction].className.includes('snake')) {
-                    end()
+                    end();
                     return window.cancelAnimationFrame(game);
 
                 }

@@ -30,6 +30,10 @@ body {
     cursor: pointer;
 }
 
+#start:disabled {
+    color: black;
+}
+
 #game-area {
     background-color: transparent;
     border: none;
