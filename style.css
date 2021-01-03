@@ -4,6 +4,7 @@
     box-sizing: border-box;
     font-family: 'Courier New', Courier, monospace;
     font-weight: 600;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -41,14 +42,14 @@ body {
 }
 
 .apple {
-    border-radius: 8px;
+    border-radius: 6px;
     background-color: rgba(156, 40, 40, 0.795);
     animation: spin 2s linear infinite;
 }
 
 .snake {
     background-color: rgba(232, 253, 248, 0.733);
-    border-radius: 8px;
+    border-radius: 7px;
 }
 
 .lose {

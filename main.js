@@ -12,7 +12,7 @@ let lose = [254, 255, 256, 258, 259, 260, 262, 263, 264, 266, 267, 268, 270, 279
 
 
 
-//best score
+//storing and showing best score
 
 function highestScore() {
 
@@ -79,8 +79,9 @@ function control(e) {
     }
 }
 
+//when the game ends
+
 function end() {
-    // allSquares[applePos].style.opacity='0.3';
 
     lose.forEach(function(item) {
         allSquares[item].classList.add('lose');
@@ -101,11 +102,8 @@ function end() {
 
     bestScore.push(point);
 
-    console.log(bestScore)
-    highestScore()
 
-    // allSquares.forEach(square =>
-    //     square.classList.remove('snake'))
+    highestScore()
 
 
 }
@@ -114,7 +112,7 @@ function end() {
 
 window.addEventListener('keydown', control)
 
-
+//start the game 
 start.addEventListener('click', function() {
     apple()
     snake = [37, 36, 35]
@@ -196,7 +194,6 @@ start.addEventListener('click', function() {
                     speed = speed * 0.9;
                 }
 
-
             }
 
             snakeBody()
@@ -208,10 +205,10 @@ start.addEventListener('click', function() {
 })
 
 
-//touchscreen
+//for touchscreen
 
-window.addEventListener("touchstart", startTouch, false);
-window.addEventListener("touchmove", moveTouch, false);
+window.addEventListener("touchstart", startTouch, { passive: false });
+window.addEventListener("touchmove", moveTouch, { passive: false });
 
 
 let initialX = null;
