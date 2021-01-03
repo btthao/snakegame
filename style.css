@@ -15,6 +15,7 @@ body {
     align-items: center;
     text-align: center;
     background-color: rgba(24, 87, 48, 0.705);
+    touch-action: pinch-zoom;
 }
 
 #start {

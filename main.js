@@ -211,7 +211,7 @@ start.addEventListener('click', function() {
 //touchscreen
 
 window.addEventListener("touchstart", startTouch, false);
-window.addEventListener("touchmove", moveTouch, { passive: false });
+window.addEventListener("touchmove", moveTouch, false);
 
 // Swipe Up / Down / Left / Right
 var initialX = null;
