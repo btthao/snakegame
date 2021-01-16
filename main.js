@@ -32,7 +32,7 @@ function highestScore() {
         }
 
         if (check == checkScore.length) {
-            alert('highest score')
+            alert('Highest score')
         }
         console.log(checkScore);
         console.log(check)
@@ -45,7 +45,6 @@ function highestScore() {
 //create divs/squares inside game area
 for (let i = 0; i < (row * row); i++) {
     const square = document.createElement('div');
-    // square.innerHTML = i;
     gameArea.appendChild(square);
 }
 const allSquares = document.querySelectorAll('#game-area div')
@@ -63,7 +62,6 @@ function apple() {
 
 //keyboard control 
 function control(e) {
-    // squares[currentIndex].classList.remove('snake')
     if (direction == 1 || direction == -1) {
         if (e.keyCode === 40) {
             direction = row;
@@ -108,111 +106,7 @@ function end() {
 
 }
 
-
-
-window.addEventListener('keydown', control)
-
-//start the game 
-start.addEventListener('click', function() {
-    start.disabled = true;
-    setTimeout(function() { start.disabled = false }, 1000);
-    allSquares.forEach(square =>
-        square.classList.remove('lose'))
-    allSquares.forEach(square =>
-        square.style.opacity = '1')
-    apple()
-    snake = [37, 36, 35]
-    lastRender = 0;
-    direction = 1;
-    speed = 200;
-    score.innerHTML = '0'
-    point = 0;
-
-
-
-    function play(currentTime) {
-        var game = window.requestAnimationFrame(play)
-        const interval = (currentTime - lastRender);
-
-
-        if (interval >= speed) {
-            lastRender = currentTime;
-
-            function snakeBody() {
-                // check if snake hits the border or itself
-                switch (direction) {
-                    case 1:
-                        if (snake[0] == row - 1 || snake[0] % row == (row - 1)) {
-                            end();
-                            return window.cancelAnimationFrame(game);
-
-                        }
-                        break
-                    case -1:
-                        if (snake[0] == 0 || snake[0] % row == 0) {
-                            end();
-                            return window.cancelAnimationFrame(game);
-
-                        }
-                        break
-                    case row:
-                        if (snake[0] >= (row * row) - row) {
-                            end();
-                            return window.cancelAnimationFrame(game);
-
-                        }
-                        break
-                    case -row:
-                        if (snake[0] < row) {
-                            end();
-                            return window.cancelAnimationFrame(game);
-
-                        }
-                        break
-                }
-
-                if (allSquares[snake[0] + direction].className.includes('snake')) {
-                    end();
-                    return window.cancelAnimationFrame(game);
-
-                }
-
-                allSquares.forEach(square =>
-                    square.classList.remove('snake')
-                )
-                for (let i = snake.length - 1; i > 0; i--) {
-                    snake[i] = snake[i - 1];
-                }
-                snake[0] = snake[0] + direction;
-
-                snake.forEach(function(segment) {
-                    allSquares[segment].classList.add('snake');
-                })
-
-                if (allSquares[snake[0]].className.includes('apple')) {
-                    apple()
-                    snake.push(snake[snake.length - 1]);
-                    point++;
-                    score.innerHTML = point;
-                    speed = speed * 0.9;
-                }
-
-            }
-
-            snakeBody()
-        }
-    }
-    window.requestAnimationFrame(play)
-
-
-})
-
-
 //for touchscreen
-
-window.addEventListener("touchstart", startTouch, { passive: false });
-window.addEventListener("touchmove", moveTouch, { passive: false });
-
 
 let initialX = null;
 let initialY = null;
@@ -262,3 +156,114 @@ function moveTouch(e) {
 
     e.preventDefault();
 };
+
+function stop() {
+    window.removeEventListener("touchstart", startTouch, { passive: false });
+    window.removeEventListener("touchmove", moveTouch, { passive: false });
+    window.removeEventListener('keydown', control);
+};
+
+
+
+
+//start the game 
+start.addEventListener('click', function() {
+    window.addEventListener('keydown', control);
+    window.addEventListener("touchstart", startTouch, { passive: false });
+    window.addEventListener("touchmove", moveTouch, { passive: false });
+    start.disabled = true;
+    setTimeout(function() { start.disabled = false }, 1000);
+    allSquares.forEach(square =>
+        square.classList.remove('lose'))
+    allSquares.forEach(square =>
+        square.style.opacity = '1')
+    apple()
+    snake = [37, 36, 35]
+    lastRender = 0;
+    direction = 1;
+    speed = 200;
+    score.innerHTML = '0'
+    point = 0;
+
+
+    function play(currentTime) {
+        var game = window.requestAnimationFrame(play)
+        const interval = (currentTime - lastRender);
+
+
+        if (interval >= speed) {
+            lastRender = currentTime;
+
+            function snakeBody() {
+                // check if snake hits the border or itself
+                switch (direction) {
+                    case 1:
+                        if (snake[0] == row - 1 || snake[0] % row == (row - 1)) {
+                            stop();
+                            end();
+                            return window.cancelAnimationFrame(game);
+
+                        }
+                        break
+                    case -1:
+                        if (snake[0] == 0 || snake[0] % row == 0) {
+                            stop();
+                            end();
+                            return window.cancelAnimationFrame(game);
+
+                        }
+                        break
+                    case row:
+                        if (snake[0] >= (row * row) - row) {
+                            stop();
+                            end();
+                            return window.cancelAnimationFrame(game);
+
+                        }
+                        break
+                    case -row:
+                        if (snake[0] < row) {
+                            stop();
+                            end();
+                            return window.cancelAnimationFrame(game);
+
+                        }
+                        break
+                }
+
+                if (allSquares[snake[0] + direction].className.includes('snake')) {
+                    stop();
+                    end();
+                    return window.cancelAnimationFrame(game);
+
+                }
+
+                allSquares.forEach(square =>
+                    square.classList.remove('snake')
+                )
+                for (let i = snake.length - 1; i > 0; i--) {
+                    snake[i] = snake[i - 1];
+                }
+                snake[0] = snake[0] + direction;
+
+                snake.forEach(function(segment) {
+                    allSquares[segment].classList.add('snake');
+                })
+
+                if (allSquares[snake[0]].className.includes('apple')) {
+                    apple()
+                    snake.push(snake[snake.length - 1]);
+                    point++;
+                    score.innerHTML = point;
+                    speed = speed * 0.9;
+                }
+
+            }
+
+            snakeBody()
+        }
+    }
+    window.requestAnimationFrame(play)
+
+
+})
