@@ -1,5 +1,5 @@
 let snake;
-let bestScore = [];
+let bestScore = 0;
 const gameArea = document.getElementById('game-area');
 const start = document.getElementById('start');
 const score = document.getElementById('score');
@@ -14,31 +14,12 @@ let lose = [254, 255, 256, 258, 259, 260, 262, 263, 264, 266, 267, 268, 270, 279
 
 //storing and showing best score
 
-function highestScore() {
-
-    if (bestScore.length >= 2) {
-        let check = 0;
-        let checkScore = [];
-        for (let i = bestScore.length - 2; i >= 0; i--) {
-            if (bestScore[bestScore.length - 1] > bestScore[i]) {
-                checkScore.push(1)
-            } else {
-                checkScore.push(0)
-            }
-        }
-        for (let i = 0; i < checkScore.length; i++) {
-
-            check += checkScore[i];
-        }
-
-        if (check == checkScore.length) {
-            alert('Highest score')
-        }
-        
+function highestScore(point) {
+    if (point > bestScore) {
+        bestScore = point;
+        alert("Highest score");
     }
-
 }
-
 
 
 //create divs/squares inside game area
@@ -97,10 +78,8 @@ function end() {
         }
     })
 
-    bestScore.push(point);
 
-
-    highestScore()
+    highestScore(point)
 
 
 }
