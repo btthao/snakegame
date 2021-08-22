@@ -14,10 +14,10 @@ let lose = [254, 255, 256, 258, 259, 260, 262, 263, 264, 266, 267, 268, 270, 279
 
 //storing and showing best score
 
-function highestScore(point) {
+function highestScore() {
     if (point > bestScore) {
         bestScore = point;
-        alert("Highest score");
+        alert("Best score!");
     }
 }
 
@@ -79,7 +79,7 @@ function end() {
     })
 
 
-    highestScore(point)
+    highestScore()
 
 
 }
