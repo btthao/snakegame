@@ -34,8 +34,7 @@ function highestScore() {
         if (check == checkScore.length) {
             alert('Highest score')
         }
-        console.log(checkScore);
-        console.log(check)
+        
     }
 
 }
